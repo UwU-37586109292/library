@@ -1,0 +1,27 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: grid;
+    grid-template-areas:
+        "sidebar header"
+        "sidebar dashboard";
+    grid-template-rows: auto 1fr;
+    grid-template-columns: auto 1fr;
+}
+
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+.header {
+    grid-area: header;
+}
+
+.books-dashboard {
+    grid-area: dashboard;
+}
