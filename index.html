@@ -36,8 +36,11 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <form action="javascript:;" onsubmit="addBook(this)">
+            <form action="javascript:;" onsubmit="addBook(bookTitle.value, author.value, pages.value, read.value )">
                 <input type="text" id="bookTitle" name="bookTitle">
+                <input type="text" id="author" name="author">
+                <input type="text" id="pages" name="pages">
+                <input type="text" id="read" name="read">
                 <button type="submit">Save</button>
             </form>
         </div>

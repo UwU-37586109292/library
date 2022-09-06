@@ -26,5 +26,7 @@ function closeModal() {
     modal.style.display = "none";
 }
 
-function addBook(book) {
+function addBook(title, author, pages, read) {
+    const book = new Book(title, author, pages, read)
+    addBookToLibrary(book)
 }
