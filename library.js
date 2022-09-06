@@ -17,6 +17,7 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
-function addBookModal() {
-
+function showAddBookModal() {
+    const modal = document.getElementById("modal");
+    modal.style.display = "block";
 }
