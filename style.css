@@ -8,14 +8,14 @@ html {
     --persian-green: #00a896ff;
     --mountain-meadow: #02c39aff;
     --pale-spring-bud: #f0f3bdff;
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 body {
     display: grid;
     grid-template-areas:
-        "sidebar header"
         "sidebar dashboard";
-    grid-template-rows: auto 1fr;
     grid-template-columns: auto 1fr;
 }
 
@@ -49,11 +49,21 @@ button:active {
     transform: scale(.98);
 }
 
-.header {
-    grid-area: header;
-}
-
 .books-dashboard {
     grid-area: dashboard;
 
+    background-color: var(--pale-spring-bud);
+}
+
+.books-container {
+    display: grid;
+    padding: 10px;
+    gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.card {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--mountain-meadow);
 }
