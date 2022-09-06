@@ -16,8 +16,15 @@ let myLibrary = [];
 function addBookToLibrary(book) {
     myLibrary.push(book);
 }
+const modal = document.getElementById("modal");
 
 function showAddBookModal() {
-    const modal = document.getElementById("modal");
     modal.style.display = "block";
+}
+
+function closeModal() {
+    modal.style.display = "none";
+}
+
+function addBook(book) {
 }
