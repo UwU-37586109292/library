@@ -51,6 +51,7 @@ button:active {
 
 .books-dashboard {
     grid-area: dashboard;
+    padding: 15px;
 
     background-color: var(--pale-spring-bud);
 }
