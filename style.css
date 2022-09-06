@@ -2,6 +2,12 @@ body,
 html {
     margin: 0;
     padding: 0;
+
+    --blue-sapphire: #05668dff;
+    --metallic-seaweed: #028090ff;
+    --persian-green: #00a896ff;
+    --mountain-meadow: #02c39aff;
+    --pale-spring-bud: #f0f3bdff;
 }
 
 body {
