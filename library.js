@@ -15,6 +15,7 @@ let myLibrary = [];
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
+    addNewBookCard(book)
 }
 const modal = document.getElementById("modal");
 
@@ -32,8 +33,19 @@ function addBook(title, author, pages, read) {
     closeModal()
 
     document.getElementById("add-book-form").reset()
+}
 
-    refreshBookCards()
+function addNewBookCard(book) {
+    const booksContainer = document.querySelector('.books-container')
+    const newCard = document.createElement('div')
+    newCard.classList.add('card')
+    newCard.innerText = book.info()
+
+    booksContainer.appendChild(newCard)
+
+    newCard.addEventListener('click', function (e) {
+        e.target.classList.toggle('selected')
+    })
 }
 
 function removeAllBookCards() {
