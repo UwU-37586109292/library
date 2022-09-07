@@ -7,7 +7,7 @@ function Book(title, author, pages, isRead) {
 }
 
 Book.prototype.info = function () {
-    const readStr = this.isRead ? 'already read' : 'not yet read';
+    const readStr = this.isRead === "true" ? 'already read' : 'not yet read';
     return `${this.title} by ${this.author}, ${this.pages} pages, ${readStr}`;
 }
 
@@ -46,6 +46,7 @@ function addNewBookCard(book) {
     newCard.addEventListener('click', function (e) {
         e.target.classList.toggle('selected')
     })
+    setNoContentVisibility()
 }
 
 function removeAllBookCards() {
@@ -53,6 +54,7 @@ function removeAllBookCards() {
     Array.from(cards).forEach(element => {
         element.remove()
     });
+    setNoContentVisibility();
 }
 
 function clearLibrary() {
