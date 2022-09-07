@@ -78,10 +78,17 @@ button:active {
     padding: 10px;
     border-radius: 5px;
     background-color: var(--mountain-meadow);
+    display: grid;
+    grid-template-columns: 1fr auto;
 }
 
 .card.selected {
     background-color: var(--metallic-seaweed);
+}
+
+.card .controls {
+    display: grid;
+    gap: 8px;
 }
 
 /* Add book modal */
