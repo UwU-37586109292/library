@@ -50,7 +50,15 @@ function clearLibrary() {
 
 function refreshBookCards() {
     removeAllBookCards()
+    addAllBooksFromListToCards()
+    addEventListenersToCards()
+
+    setNoContentVisibility()
+}
+
+function addAllBooksFromListToCards() {
     const booksContainer = document.querySelector('.books-container')
+
     myLibrary.forEach(element => {
         const newCard = document.createElement('div')
         newCard.classList.add('card')
@@ -58,19 +66,24 @@ function refreshBookCards() {
 
         booksContainer.appendChild(newCard)
     });
-
-    if (myLibrary.length === 0) {
-        setNoContentVisibility('visible')
-    } else {
-        setNoContentVisibility('hidden')
-    }
 }
 
-function setNoContentVisibility(flag) {
+function addEventListenersToCards() {
+    const allCards = document.querySelectorAll('.card');
+    Array.from(allCards).forEach(card => {
+        card.addEventListener('click', toggleCardSelect)
+    });
+}
+
+function toggleCardSelect(event) {
+    event.target.classList.toggle('selected')
+}
+
+function setNoContentVisibility() {
     const noContentPlaceholder = document.querySelector('.no-content')
     const addButtonOnDashboard = document.querySelector('.books-dashboard > button')
 
-    if (flag === 'visible') {
+    if (myLibrary.length === 0) {
         noContentPlaceholder.style.display = 'block'
         addButtonOnDashboard.style.display = 'block'
     } else {
