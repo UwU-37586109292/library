@@ -29,4 +29,25 @@ function closeModal() {
 function addBook(title, author, pages, read) {
     const book = new Book(title, author, pages, read)
     addBookToLibrary(book)
+    refreshBookCards()
+}
+
+function removeAllBookCards() {
+    const cards = document.getElementsByClassName('card')
+    Array.from(cards).forEach(element => {
+        element.remove()
+    });
+
+}
+
+function refreshBookCards() {
+    removeAllBookCards()
+    const booksContainer = document.querySelector('.books-container')
+    myLibrary.forEach(element => {
+        const newCard = document.createElement('div')
+        newCard.classList.add('card')
+        newCard.innerText = element.info()
+
+        booksContainer.appendChild(newCard)
+    });
 }
