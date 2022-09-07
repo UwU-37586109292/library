@@ -71,12 +71,10 @@ function addAllBooksFromListToCards() {
 function addEventListenersToCards() {
     const allCards = document.querySelectorAll('.card');
     Array.from(allCards).forEach(card => {
-        card.addEventListener('click', toggleCardSelect)
-    });
-}
-
-function toggleCardSelect(event) {
-    event.target.classList.toggle('selected')
+        card.addEventListener('click', function (e) {
+            e.target.classList.toggle('selected')
+        })
+    })
 }
 
 function deleteSelected() {
