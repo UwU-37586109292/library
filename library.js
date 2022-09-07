@@ -29,6 +29,10 @@ function closeModal() {
 function addBook(title, author, pages, read) {
     const book = new Book(title, author, pages, read)
     addBookToLibrary(book)
+    closeModal()
+
+    document.getElementById("add-book-form").reset()
+
     refreshBookCards()
 }
 
@@ -37,7 +41,11 @@ function removeAllBookCards() {
     Array.from(cards).forEach(element => {
         element.remove()
     });
+}
 
+function clearLibrary() {
+    myLibrary = []
+    refreshBookCards()
 }
 
 function refreshBookCards() {
@@ -50,4 +58,27 @@ function refreshBookCards() {
 
         booksContainer.appendChild(newCard)
     });
+
+    if (myLibrary.length === 0) {
+        setNoContentVisibility('visible')
+    } else {
+        setNoContentVisibility('hidden')
+    }
+}
+
+function setNoContentVisibility(flag) {
+    const noContentPlaceholder = document.querySelector('.no-content')
+    const addButtonOnDashboard = document.querySelector('.books-dashboard > button')
+
+    if (flag === 'visible') {
+        noContentPlaceholder.style.display = 'block'
+        addButtonOnDashboard.style.display = 'block'
+    } else {
+        noContentPlaceholder.style.display = 'none'
+        addButtonOnDashboard.style.display = 'none'
+    }
+}
+
+function addDummy() {
+    addBook('title', 'author', 'pages', 'read')
 }
