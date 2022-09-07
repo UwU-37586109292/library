@@ -79,6 +79,11 @@ function toggleCardSelect(event) {
     event.target.classList.toggle('selected')
 }
 
+function deleteSelected() {
+    const selectedCards = document.querySelectorAll('.card.selected')
+    console.log(selectedCards)
+}
+
 function setNoContentVisibility() {
     const noContentPlaceholder = document.querySelector('.no-content')
     const addButtonOnDashboard = document.querySelector('.books-dashboard > button')
