@@ -14,8 +14,12 @@ Book.prototype.info = function () {
 let myLibrary = [];
 
 function addBookToLibrary(book) {
-    myLibrary.push(book);
-    addNewBookCard(book)
+    const existingBook = myLibrary.find(element => element.title === book.title && element.author === book.author && element.pages === book.pages)
+    if (existingBook) { alert('The book already exists!') }
+    else {
+        myLibrary.push(book)
+        addNewBookCard(book)
+    };
 }
 const modal = document.getElementById("modal");
 
@@ -98,14 +102,11 @@ function deleteSelected() {
 
 function setNoContentVisibility() {
     const noContentPlaceholder = document.querySelector('.no-content')
-    const addButtonOnDashboard = document.querySelector('.books-dashboard > button')
 
     if (myLibrary.length === 0) {
         noContentPlaceholder.style.display = 'block'
-        addButtonOnDashboard.style.display = 'block'
     } else {
         noContentPlaceholder.style.display = 'none'
-        addButtonOnDashboard.style.display = 'none'
     }
 }
 
