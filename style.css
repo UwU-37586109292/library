@@ -9,6 +9,8 @@ html {
     --mountain-meadow: #02c39aff;
     --pale-spring-bud: #f0f3bdff;
 
+    --modal-background: rgba(241, 239, 239);
+
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
@@ -45,6 +47,12 @@ button:hover {
     background-color: var(--pale-spring-bud);
     color: var(--metallic-seaweed);
     cursor: pointer;
+}
+
+button.cancel {
+    background-color: var(--modal-background);
+    border: 1px solid var(--metallic-seaweed);
+    color: var(--metallic-seaweed)
 }
 
 button:active {
@@ -98,7 +106,7 @@ button:active {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: var(--modal-background);
     margin: 15% auto;
     border-radius: 20px;
 
@@ -116,6 +124,23 @@ fieldset {
     margin: 0;
     margin-bottom: 5px;
 }
+
+input {
+    border: 2px solid lightblue;
+    background-color: rgba(241, 239, 239, 0);
+    border-radius: 6px;
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid lightblue;
+}
+
+
+input:invalid:not(:placeholder-shown) {
+    border: 2px solid tomato;
+}
+
 
 /* The Close Button */
 .close {
@@ -139,4 +164,18 @@ fieldset {
 
 .column {
     flex-direction: column;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
 }
