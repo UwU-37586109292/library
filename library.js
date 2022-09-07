@@ -24,7 +24,7 @@ function closeModal() {
 }
 
 function addBook(title, author, pages, read) {
-    const book = new Book(title, author, pages, read)
+    const book = new Book(title, author, pages, read === true)
     const existingBook = myLibrary.find(element => element.title === book.title && element.author === book.author)
     if (existingBook) { alert('The book already exists!') }
     else {
@@ -51,6 +51,10 @@ function addNewBookCard(book) {
     const pages = document.createElement('div')
     pages.classList.add('pages')
     pages.innerText = `${book.pages}`
+    const read = document.createElement('div')
+    read.classList.add('read')
+
+    read.innerText = book.isRead ? 'Already read' : 'To be read'
 
     const info = document.createElement('div')
     info.classList.add('info')
@@ -58,25 +62,25 @@ function addNewBookCard(book) {
     info.appendChild(title)
     info.appendChild(author)
     info.appendChild(pages)
+    info.appendChild(read)
 
     newCard.appendChild(info)
 
     const controls = document.createElement('div')
     controls.classList.add('controls')
 
-    const editBtn = document.createElement('button')
-    editBtn.classList.add('edit')
-    editBtn.innerText = 'Edit'
+    const readBtn = document.createElement('button')
+    readBtn.classList.add('read')
+    readBtn.innerText = 'Read/Unread'
     const deleteBtn = document.createElement('button')
     deleteBtn.classList.add('delete')
     deleteBtn.innerText = 'Delete'
 
-    editBtn.addEventListener('click', editCard)
     deleteBtn.addEventListener('click', deleteCard)
-
-
-    controls.appendChild(editBtn)
     controls.appendChild(deleteBtn)
+
+    readBtn.addEventListener('click', toggleReadStatus)
+    controls.appendChild(readBtn)
 
     newCard.appendChild(controls)
 
@@ -104,7 +108,6 @@ function clearLibrary() {
 function refreshBookCards() {
     removeAllBookCards()
     addAllBooksFromListToCards()
-    addEventListenersToCards()
 
     setNoContentVisibility()
 }
@@ -121,20 +124,6 @@ function addAllBooksFromListToCards() {
     });
 }
 
-function addEventListenersToCards() {
-    const allCards = document.querySelectorAll('.card');
-    Array.from(allCards).forEach(card => {
-        card.addEventListener('click', function (e) {
-            e.target.classList.toggle('selected')
-        })
-    })
-}
-
-function deleteSelected() {
-    const selectedCards = document.querySelectorAll('.card.selected')
-    console.log(selectedCards)
-}
-
 function setNoContentVisibility() {
     const noContentPlaceholder = document.querySelector('.no-content')
 
@@ -149,10 +138,6 @@ function addDummy() {
     addBook('title', 'author' + Math.floor(Math.random() * 10000), 'pages', 'read')
 }
 
-function editCard(event) {
-    console.log(event)
-}
-
 function deleteCard(event) {
     const cardToDelete = event.target.parentElement.parentElement
     const title = cardToDelete.children[0].children[0].innerText
@@ -163,4 +148,15 @@ function deleteCard(event) {
 
     cardToDelete.parentNode.removeChild(cardToDelete)
     setNoContentVisibility()
+}
+
+function toggleReadStatus(event) {
+    const card = event.target.parentElement.parentElement
+    const title = card.children[0].children[0].innerText
+    const author = card.children[0].children[1].innerText
+
+    const book = myLibrary.find(element => element.title === title && element.author === author)
+    book.isRead = !book.isRead
+
+    card.children[0].children[3].innerText = book.isRead ? 'Already read' : 'To be read'
 }
