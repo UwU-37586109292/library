@@ -65,6 +65,7 @@ function addNewBookCard(book) {
     info.appendChild(read)
 
     newCard.appendChild(info)
+    newCard.setAttribute("book", book);
 
     const controls = document.createElement('div')
     controls.classList.add('controls')
@@ -140,10 +141,8 @@ function addDummy() {
 
 function deleteCard(event) {
     const cardToDelete = event.target.parentElement.parentElement
-    const title = cardToDelete.children[0].children[0].innerText
-    const author = cardToDelete.children[0].children[1].innerText
 
-    const bookToDelete = myLibrary.find(element => element.title === title && element.author === author)
+    const bookToDelete = cardToDelete.book;
     myLibrary.splice(myLibrary.indexOf(bookToDelete), 1)
 
     cardToDelete.parentNode.removeChild(cardToDelete)
@@ -152,8 +151,6 @@ function deleteCard(event) {
 
 function toggleReadStatus(event) {
     const card = event.target.parentElement.parentElement
-    const title = card.children[0].children[0].innerText
-    const author = card.children[0].children[1].innerText
 
     const book = myLibrary.find(element => element.title === title && element.author === author)
     book.isRead = !book.isRead
