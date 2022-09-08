@@ -87,9 +87,7 @@ function addNewBookCard(book) {
 
     booksContainer.appendChild(newCard)
 
-    newCard.addEventListener('click', function (e) {
-        e.target.classList.toggle('selected')
-    })
+
     setNoContentVisibility()
 }
 
