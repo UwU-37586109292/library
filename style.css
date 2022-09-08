@@ -31,6 +31,22 @@ body {
     background-size: cover;
 }
 
+.header .background {
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 8%;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.header .text {
+    padding: 20px;
+    font-size: xx-large;
+    color: aliceblue;
+}
+
 .sidebar {
     min-height: 100vh;
     grid-area: sidebar;
