@@ -17,6 +17,15 @@ const modal = document.getElementById("modal");
 
 function showAddBookModal() {
     modal.style.display = "block";
+    document.getElementById('save').style.display = 'block'
+    document.querySelector('.update').style.display = 'none'
+
+}
+function showEditBookModal() {
+    modal.style.display = "block";
+    document.getElementById('save').style.display = 'none'
+    document.querySelector('.update').style.display = 'block'
+
 }
 
 function closeModal() {
@@ -77,7 +86,12 @@ function addNewBookCard(book) {
     read.innerText = book.isRead ? 'Read' : 'Not read'
     read.addEventListener('click', toggleReadStatus)
 
+    const editBtn = document.createElement('button')
+    editBtn.innerText = 'Edit'
+    editBtn.addEventListener('click', editCurrentCard)
+
     controls.appendChild(read)
+    controls.appendChild(editBtn)
 
     newCard.appendChild(controls)
 
@@ -130,7 +144,7 @@ function setNoContentVisibility() {
 }
 
 function addDummy() {
-    addBook('title', 'author' + Math.floor(Math.random() * 10000), 'pages', 'read')
+    addBook('title', 'author' + Math.floor(Math.random() * 10000), 123, 'read')
 }
 
 function deleteCard(event) {
@@ -160,4 +174,45 @@ function toggleReadStatus(event) {
     myLibrary[bookIndex].isRead = !myLibrary[bookIndex].isRead
 
     card.querySelector('.read').innerText = myLibrary[bookIndex].isRead ? 'Read' : 'Not read'
+}
+
+function editCurrentCard(event) {
+    const card = event.target.parentElement.parentElement
+    const bookIndex = card.getAttribute('data-index')
+    const book = myLibrary[bookIndex]
+    //prefill data
+
+    showEditBookModal()
+    document.getElementById('bookTitle').value = book.title
+    document.getElementById('author').value = book.author
+    document.getElementById('pages').value = book.pages
+    document.getElementById('yes').checked = book.isRead
+    document.getElementById('no').checked = !book.isRead
+
+    document.querySelector('button.update')
+        .addEventListener('click', function handler() {
+            const newBook = new Book(document.getElementById('bookTitle').value,
+                document.getElementById('author').value,
+                document.getElementById('pages').value,
+                document.getElementById('yes').checked)
+            updateBook(bookIndex, newBook)
+
+            closeModal()
+            document.getElementById("add-book-form").reset()
+            document.querySelector('button.update')
+            this.removeEventListener('click', handler)
+        })
+
+}
+
+function updateBook(bookId, book) {
+    myLibrary[bookId].title = book.title
+    myLibrary[bookId].author = book.author
+    myLibrary[bookId].pages = book.pages
+    myLibrary[bookId].isRead = book.isRead
+
+    document.querySelectorAll('.card')[bookId].querySelector('.title').innerText = book.title
+    document.querySelectorAll('.card')[bookId].querySelector('.author').innerText = book.author
+    document.querySelectorAll('.card')[bookId].querySelector('.pages').innerText = book.pages
+    document.querySelectorAll('.card')[bookId].querySelector('.read').innerText = book.isRead ? 'Read' : 'Not read'
 }

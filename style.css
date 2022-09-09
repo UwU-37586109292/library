@@ -85,7 +85,6 @@ button:active {
 }
 
 button.read {
-    margin-top: 5px;
     min-width: 100px;
 }
 
