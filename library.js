@@ -41,6 +41,7 @@ function addNewBookCard(book) {
     const booksContainer = document.querySelector('.books-container')
     const newCard = document.createElement('div')
     newCard.classList.add('card')
+    newCard.setAttribute('data-index', myLibrary.length - 1)
 
     const title = document.createElement('div')
     title.classList.add('title')
@@ -51,10 +52,10 @@ function addNewBookCard(book) {
     const pages = document.createElement('div')
     pages.classList.add('pages')
     pages.innerText = `${book.pages}`
-    const read = document.createElement('div')
+    const read = document.createElement('button')
     read.classList.add('read')
 
-    read.innerText = book.isRead ? 'Already read' : 'To be read'
+    read.innerText = book.isRead ? 'Read' : 'Not read'
 
     const info = document.createElement('div')
     info.classList.add('info')
@@ -65,14 +66,13 @@ function addNewBookCard(book) {
     info.appendChild(read)
 
     newCard.appendChild(info)
-    newCard.setAttribute("book", book);
 
     const controls = document.createElement('div')
     controls.classList.add('controls')
 
-    const readBtn = document.createElement('button')
-    readBtn.classList.add('read')
-    readBtn.innerText = 'Read/Unread'
+    // const readBtn = document.createElement('button')
+    // readBtn.classList.add('read')
+    // readBtn.innerText = 'Read/Unread'
     const deleteBtn = document.createElement('button')
     deleteBtn.classList.add('delete')
     deleteBtn.innerText = 'Delete'
@@ -80,8 +80,8 @@ function addNewBookCard(book) {
     deleteBtn.addEventListener('click', deleteCard)
     controls.appendChild(deleteBtn)
 
-    readBtn.addEventListener('click', toggleReadStatus)
-    controls.appendChild(readBtn)
+    read.addEventListener('click', toggleReadStatus)
+    // controls.appendChild(readBtn)
 
     newCard.appendChild(controls)
 
@@ -140,8 +140,17 @@ function addDummy() {
 function deleteCard(event) {
     const cardToDelete = event.target.parentElement.parentElement
 
-    const bookToDelete = cardToDelete.book;
-    myLibrary.splice(myLibrary.indexOf(bookToDelete), 1)
+    const bookIndex = cardToDelete.getAttribute('data-index')
+    myLibrary.splice(bookIndex, 1)
+    const cards = document.querySelectorAll('.card')
+
+    //update following cards indexes
+    cards.forEach(card => {
+        let prevIndex = +card.getAttribute('data-index')
+        if (prevIndex > bookIndex) {
+            card.setAttribute('data-index', prevIndex - 1)
+        }
+    })
 
     cardToDelete.parentNode.removeChild(cardToDelete)
     setNoContentVisibility()
@@ -149,9 +158,4 @@ function deleteCard(event) {
 
 function toggleReadStatus(event) {
     const card = event.target.parentElement.parentElement
-
-    const book = myLibrary.find(element => element.title === title && element.author === author)
-    book.isRead = !book.isRead
-
-    card.children[0].children[3].innerText = book.isRead ? 'Already read' : 'To be read'
 }
