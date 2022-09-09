@@ -84,6 +84,11 @@ button:active {
     transform: scale(.98);
 }
 
+button.read {
+    margin-top: 5px;
+    min-width: 100px;
+}
+
 .books-dashboard {
     grid-area: dashboard;
     padding: 15px;

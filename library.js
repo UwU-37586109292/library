@@ -70,9 +70,6 @@ function addNewBookCard(book) {
     const controls = document.createElement('div')
     controls.classList.add('controls')
 
-    // const readBtn = document.createElement('button')
-    // readBtn.classList.add('read')
-    // readBtn.innerText = 'Read/Unread'
     const deleteBtn = document.createElement('button')
     deleteBtn.classList.add('delete')
     deleteBtn.innerText = 'Delete'
@@ -81,7 +78,6 @@ function addNewBookCard(book) {
     controls.appendChild(deleteBtn)
 
     read.addEventListener('click', toggleReadStatus)
-    // controls.appendChild(readBtn)
 
     newCard.appendChild(controls)
 
@@ -142,9 +138,10 @@ function deleteCard(event) {
 
     const bookIndex = cardToDelete.getAttribute('data-index')
     myLibrary.splice(bookIndex, 1)
-    const cards = document.querySelectorAll('.card')
 
     //update following cards indexes
+    const cards = document.querySelectorAll('.card')
+
     cards.forEach(card => {
         let prevIndex = +card.getAttribute('data-index')
         if (prevIndex > bookIndex) {
@@ -158,4 +155,9 @@ function deleteCard(event) {
 
 function toggleReadStatus(event) {
     const card = event.target.parentElement.parentElement
+    const bookIndex = card.getAttribute('data-index')
+
+    myLibrary[bookIndex].isRead = !myLibrary[bookIndex].isRead
+
+    card.querySelector('.read').innerText = myLibrary[bookIndex].isRead ? 'Read' : 'Not read'
 }
