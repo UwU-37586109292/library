@@ -11,6 +11,10 @@ Book.prototype.info = function () {
     return `${this.title} by ${this.author}, ${this.pages} pages, ${readStr}`;
 }
 
+Book.prototype.toggleReadStatus = function () {
+    this.isRead = !this.isRead
+}
+
 let myLibrary = [];
 
 const modal = document.getElementById("modal");
@@ -170,8 +174,10 @@ function deleteCard(event) {
 function toggleReadStatus(event) {
     const card = event.target.parentElement.parentElement
     const bookIndex = card.getAttribute('data-index')
+    console.log(myLibrary[bookIndex])
 
-    myLibrary[bookIndex].isRead = !myLibrary[bookIndex].isRead
+    const book = myLibrary[bookIndex]
+    book.toggleReadStatus()
 
     card.querySelector('.read').innerText = myLibrary[bookIndex].isRead ? 'Read' : 'Not read'
 }
