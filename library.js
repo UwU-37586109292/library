@@ -52,10 +52,6 @@ function addNewBookCard(book) {
     const pages = document.createElement('div')
     pages.classList.add('pages')
     pages.innerText = `${book.pages}`
-    const read = document.createElement('button')
-    read.classList.add('read')
-
-    read.innerText = book.isRead ? 'Read' : 'Not read'
 
     const info = document.createElement('div')
     info.classList.add('info')
@@ -63,7 +59,6 @@ function addNewBookCard(book) {
     info.appendChild(title)
     info.appendChild(author)
     info.appendChild(pages)
-    info.appendChild(read)
 
     newCard.appendChild(info)
 
@@ -77,7 +72,12 @@ function addNewBookCard(book) {
     deleteBtn.addEventListener('click', deleteCard)
     controls.appendChild(deleteBtn)
 
+    const read = document.createElement('button')
+    read.classList.add('read')
+    read.innerText = book.isRead ? 'Read' : 'Not read'
     read.addEventListener('click', toggleReadStatus)
+
+    controls.appendChild(read)
 
     newCard.appendChild(controls)
 
