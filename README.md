@@ -1,3 +1,3 @@
 # library
 
-Library app to train objects creation, inheritance etc
+Library app to train objects 
