@@ -15,6 +15,17 @@ Book.prototype.toggleReadStatus = function () {
     this.isRead = !this.isRead
 }
 
+Book.prototype.updateBook = function (title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+}
+
+Book.prototype.getReadText = function () {
+    return this.isRead ? 'Read' : 'Not read'
+}
+
 let myLibrary = [];
 
 const modal = document.getElementById("modal");
@@ -23,13 +34,12 @@ function showAddBookModal() {
     modal.style.display = "block";
     document.getElementById('save').style.display = 'block'
     document.querySelector('.update').style.display = 'none'
-
 }
+
 function showEditBookModal() {
     modal.style.display = "block";
     document.getElementById('save').style.display = 'none'
     document.querySelector('.update').style.display = 'block'
-
 }
 
 function closeModal() {
@@ -46,8 +56,6 @@ function addBook(title, author, pages, read) {
         closeModal()
         document.getElementById("add-book-form").reset()
     };
-
-
 }
 
 function addNewBookCard(book) {
@@ -87,7 +95,7 @@ function addNewBookCard(book) {
 
     const read = document.createElement('button')
     read.classList.add('read')
-    read.innerText = book.isRead ? 'Read' : 'Not read'
+    read.innerText = book.getReadText()
     read.addEventListener('click', toggleReadStatus)
 
     const editBtn = document.createElement('button')
@@ -100,8 +108,6 @@ function addNewBookCard(book) {
     newCard.appendChild(controls)
 
     booksContainer.appendChild(newCard)
-
-
     setNoContentVisibility()
 }
 
@@ -115,26 +121,8 @@ function removeAllBookCards() {
 
 function clearLibrary() {
     myLibrary = []
-    refreshBookCards()
-}
-
-function refreshBookCards() {
     removeAllBookCards()
-    addAllBooksFromListToCards()
-
     setNoContentVisibility()
-}
-
-function addAllBooksFromListToCards() {
-    const booksContainer = document.querySelector('.books-container')
-
-    myLibrary.forEach(element => {
-        const newCard = document.createElement('div')
-        newCard.classList.add('card')
-        newCard.innerText = element.info()
-
-        booksContainer.appendChild(newCard)
-    });
 }
 
 function setNoContentVisibility() {
@@ -145,10 +133,6 @@ function setNoContentVisibility() {
     } else {
         noContentPlaceholder.style.display = 'none'
     }
-}
-
-function addDummy() {
-    addBook('title', 'author' + Math.floor(Math.random() * 10000), 123, 'read')
 }
 
 function deleteCard(event) {
@@ -212,13 +196,11 @@ function editCurrentCard(event) {
 }
 
 function updateBook(bookId, book) {
-    myLibrary[bookId].title = book.title
-    myLibrary[bookId].author = book.author
-    myLibrary[bookId].pages = book.pages
-    myLibrary[bookId].isRead = book.isRead
+    const currentBook = myLibrary[bookId]
+    currentBook.updateBook(book.title, book.author, book.pages, book.isRead)
 
-    document.querySelectorAll('.card')[bookId].querySelector('.title').innerText = book.title
-    document.querySelectorAll('.card')[bookId].querySelector('.author').innerText = book.author
-    document.querySelectorAll('.card')[bookId].querySelector('.pages').innerText = book.pages
-    document.querySelectorAll('.card')[bookId].querySelector('.read').innerText = book.isRead ? 'Read' : 'Not read'
+    document.querySelectorAll('.card')[bookId].querySelector('.title').innerText = currentBook.title
+    document.querySelectorAll('.card')[bookId].querySelector('.author').innerText = currentBook.author
+    document.querySelectorAll('.card')[bookId].querySelector('.pages').innerText = currentBook.pages
+    document.querySelectorAll('.card')[bookId].querySelector('.read').innerText = currentBook.getReadText()
 }
