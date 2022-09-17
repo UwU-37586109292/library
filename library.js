@@ -203,14 +203,15 @@ function editCurrentCard(event) {
 
 function updateBook(bookId, book) {
     const currentBook = myLibrary[bookId]
-    const existingBook = myLibrary.find(element => element.title === book.title && element.author === book.author)
-    if (existingBook !== currentBook) { alert('Book already exists!') }
+    const existingBook = myLibrary.find(element => element.title === book.title && element.author === book.author && element.pages === book.pages && element.isRead === book.isRead)
+    if (existingBook === currentBook) { alert('Book already exists!') }
     else {
         currentBook.updateBook(book.title, book.author, book.pages, book.isRead)
 
-        document.querySelectorAll('.card')[bookId].querySelector('.title').innerText = currentBook.title
-        document.querySelectorAll('.card')[bookId].querySelector('.author').innerText = currentBook.author
-        document.querySelectorAll('.card')[bookId].querySelector('.pages').innerText = currentBook.pages
-        document.querySelectorAll('.card')[bookId].querySelector('.read').innerText = currentBook.getReadText()
+        document.querySelectorAll('.card')[bookId].querySelector('.title').textContent = `Title: ${currentBook.title}`
+        document.querySelectorAll('.card')[bookId].querySelector('.author').textContent = `Author: ${currentBook.author}`
+        document.querySelectorAll('.card')[bookId].querySelector('.pages').textContent = `Pages: ${currentBook.pages}`
+        document.querySelectorAll('.card')[bookId].querySelector('.read').textContent = currentBook.getReadText()
+        document.querySelectorAll('.card')[bookId].querySelector('.readText').textContent = currentBook.getReadText()
     }
 }
