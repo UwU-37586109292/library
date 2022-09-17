@@ -26,8 +26,7 @@ body {
 .header {
     grid-area: header;
     min-height: 200px;
-    background-image: url(./assets/books.jpg);
-    background-position-y: -300px;
+    background: url(./assets/books_smaller.jpg) var(--metallic-seaweed);
     background-size: cover;
 }
 
