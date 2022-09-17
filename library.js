@@ -47,7 +47,7 @@ function closeModal() {
 }
 
 function addBook(title, author, pages, read) {
-    const book = new Book(title, author, pages, read === true)
+    const book = new Book(title, author, pages, read === "true")
     const existingBook = myLibrary.find(element => element.title === book.title && element.author === book.author)
     if (existingBook) { alert('The book already exists!') }
     else {
