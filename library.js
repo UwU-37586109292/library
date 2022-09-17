@@ -67,13 +67,16 @@ function addNewBookCard(book) {
 
     const title = document.createElement('div')
     title.classList.add('title')
-    title.innerText = `${book.title}`
+    title.innerText = `Title: ${book.title}`
     const author = document.createElement('div')
     author.classList.add('author')
-    author.innerText = `${book.author}`
+    author.innerText = `Author: ${book.author}`
     const pages = document.createElement('div')
     pages.classList.add('pages')
-    pages.innerText = `${book.pages}`
+    pages.innerText = `Pages: ${book.pages}`
+    const readText = document.createElement('div')
+    readText.classList.add('readText')
+    readText.innerText = `${book.getReadText()}`
 
     const info = document.createElement('div')
     info.classList.add('info')
@@ -81,6 +84,7 @@ function addNewBookCard(book) {
     info.appendChild(title)
     info.appendChild(author)
     info.appendChild(pages)
+    info.appendChild(readText)
 
     newCard.appendChild(info)
 
@@ -164,7 +168,8 @@ function toggleReadStatus(event) {
     const book = myLibrary[bookIndex]
     book.toggleReadStatus()
 
-    card.querySelector('.read').innerText = myLibrary[bookIndex].isRead ? 'Read' : 'Not read'
+    card.querySelector('.read').textContent = myLibrary[bookIndex].getReadText()
+    card.querySelector('.readText').textContent = myLibrary[bookIndex].getReadText()
 }
 
 function editCurrentCard(event) {
