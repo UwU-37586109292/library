@@ -198,7 +198,7 @@ function editCurrentCard(event) {
 function updateBook(bookId, book) {
     const currentBook = myLibrary[bookId]
     const existingBook = myLibrary.find(element => element.title === book.title && element.author === book.author)
-    if (existingBook) { alert('Book already exists!') }
+    if (existingBook !== currentBook) { alert('Book already exists!') }
     else {
         currentBook.updateBook(book.title, book.author, book.pages, book.isRead)
 
