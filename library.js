@@ -44,6 +44,7 @@ function showEditBookModal() {
 
 function closeModal() {
     modal.style.display = "none";
+    document.getElementById("add-book-form").reset()
 }
 
 function addBook(title, author, pages, read) {
