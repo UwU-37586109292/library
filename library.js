@@ -5,12 +5,6 @@ function Book(title, author, pages, isRead) {
     this.pages = pages;
     this.isRead = isRead;
 }
-
-Book.prototype.info = function () {
-    const readStr = this.isRead === "true" ? 'already read' : 'not yet read';
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${readStr}`;
-}
-
 Book.prototype.toggleReadStatus = function () {
     this.isRead = !this.isRead
 }
