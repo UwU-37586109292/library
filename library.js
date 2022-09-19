@@ -35,6 +35,15 @@ Array.from(document.getElementsByClassName('cancel')).forEach(element => {
     element.addEventListener('click', closeModal)
 })
 
+document.querySelector('button#save')
+    .addEventListener('click', function handler(e) {
+        e.preventDefault()
+        addBook(document.getElementById('bookTitle').value,
+            document.getElementById('author').value,
+            document.getElementById('pages').value,
+            document.getElementById('yes').checked)
+    })
+
 function showAddBookModal() {
     modal.style.display = "block";
     document.getElementById('save').style.display = 'block'
