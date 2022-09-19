@@ -93,6 +93,15 @@ button.read {
     min-width: 100px;
 }
 
+.sidebar>button.reset {
+    margin-top: 100px;
+}
+
+button.reset:hover {
+    padding: 5px 12px;
+    border: 3px solid tomato;
+}
+
 .books-dashboard {
     grid-area: dashboard;
     padding: 15px;
@@ -218,4 +227,9 @@ input[type="number"]::-webkit-inner-spin-button {
 
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+/* Delete all books confirmation modal */
+.modal-content.delete-all {
+    max-width: fit-content;
 }
