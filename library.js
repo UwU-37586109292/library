@@ -26,6 +26,14 @@ const modal = document.getElementById("modal");
 const deleteAllModal = document.getElementById("delete-all-modal")
 
 document.getElementById('confirm-deletion').addEventListener('click', clearLibrary)
+document.getElementsByClassName('add')[0].addEventListener('click', showAddBookModal)
+document.getElementsByClassName('delete-all-btn')[0].addEventListener('click', showDeleteAllBooksModal)
+Array.from(document.getElementsByClassName('close')).forEach(element => {
+    element.addEventListener('click', closeModal)
+})
+Array.from(document.getElementsByClassName('cancel')).forEach(element => {
+    element.addEventListener('click', closeModal)
+})
 
 function showAddBookModal() {
     modal.style.display = "block";

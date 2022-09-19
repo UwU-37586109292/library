@@ -93,8 +93,8 @@ button.read {
     min-width: 100px;
 }
 
-.sidebar>button.reset {
-    margin-top: 100px;
+.sidebar>button.delete-all-btn {
+    margin-top: 50px;
 }
 
 button.reset:hover {
@@ -232,4 +232,8 @@ input[type="number"] {
 /* Delete all books confirmation modal */
 .modal-content.delete-all {
     max-width: fit-content;
+}
+
+.modal-content>.delete-caution>p {
+    margin-top: 0px;
 }

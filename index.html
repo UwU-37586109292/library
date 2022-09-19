@@ -12,8 +12,8 @@
 
 <body>
     <div class="sidebar">
-        <button class="add" onclick="showAddBookModal()">Add book</button>
-        <button class="reset" onclick="showDeleteAllBooksModal()">Delete all</button>
+        <button class="add">Add book</button>
+        <button class="delete-all-btn">Delete all</button>
     </div>
 
     <div class="header">
@@ -56,10 +56,10 @@
                     <button type="submit" id="save">Save</button>
                     <button type="button" class="update">Save
                         changes</button>
-                    <button type="button" class="cancel" onclick="closeModal()">Cancel</button>
+                    <button type="button" class="cancel">Cancel</button>
                 </div>
             </form>
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close">&times;</span>
         </div>
     </div>
 
@@ -71,10 +71,10 @@
                 <p>This action can not be reverted</p>
                 <div class="flex space-between">
                     <button id="confirm-deletion" class="reset">Delete all</button>
-                    <button onclick="closeModal()">Cancel</button>
+                    <button class="cancel">Cancel</button>
                 </div>
             </div>
-            <span class=" close" onclick="closeModal()">&times;</span>
+            <span class="close">&times;</span>
         </div>
 
     </div>
