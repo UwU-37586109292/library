@@ -29,6 +29,9 @@ Book.prototype.getReadText = function () {
 let myLibrary = [];
 
 const modal = document.getElementById("modal");
+const deleteAllModal = document.getElementById("delete-all-modal")
+
+document.getElementById('confirm-deletion').addEventListener('click', clearLibrary)
 
 function showAddBookModal() {
     modal.style.display = "block";
@@ -45,6 +48,7 @@ function showEditBookModal() {
 function closeModal() {
     modal.style.display = "none";
     document.getElementById("add-book-form").reset()
+    deleteAllModal.style.display = 'none'
 }
 
 function addBook(title, author, pages, read) {
@@ -128,6 +132,7 @@ function clearLibrary() {
     myLibrary = []
     removeAllBookCards()
     setNoContentVisibility()
+    document.getElementById("delete-all-modal").style.display = 'none'
 }
 
 function setNoContentVisibility() {
@@ -214,4 +219,8 @@ function updateBook(bookId, book) {
         document.querySelectorAll('.card')[bookId].querySelector('.read').textContent = currentBook.getReadText()
         document.querySelectorAll('.card')[bookId].querySelector('.readText').textContent = currentBook.getReadText()
     }
+}
+
+function showDeleteAllBooksModal() {
+    deleteAllModal.style.display = 'block'
 }

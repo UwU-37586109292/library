@@ -13,7 +13,7 @@
 <body>
     <div class="sidebar">
         <button class="add" onclick="showAddBookModal()">Add book</button>
-        <button class="reset" onclick="clearLibrary()">Delete all</button>
+        <button class="reset" onclick="showDeleteAllBooksModal()">Delete all</button>
     </div>
 
     <div class="header">
@@ -31,7 +31,7 @@
 
     <!-- Add book modal -->
     <div id="modal" class="modal">
-        <div class="modal-content grid">
+        <div class="modal-content">
             <form id="add-book-form" action="javascript:;"
                 onsubmit="addBook(bookTitle.value, author.value, pages.value, read.value)">
 
@@ -61,6 +61,22 @@
             </form>
             <span class="close" onclick="closeModal()">&times;</span>
         </div>
+    </div>
+
+    <!-- Confirm deletion of all books modal -->
+    <div id="delete-all-modal" class="modal delete-all">
+        <div class="modal-content delete-all">
+            <div class="delete-caution">
+                <p>Are you sure you want to delete all books?</p>
+                <p>This action can not be reverted</p>
+                <div class="flex space-between">
+                    <button id="confirm-deletion" class="reset">Delete all</button>
+                    <button onclick="closeModal()">Cancel</button>
+                </div>
+            </div>
+            <span class=" close" onclick="closeModal()">&times;</span>
+        </div>
+
     </div>
 </body>
 
