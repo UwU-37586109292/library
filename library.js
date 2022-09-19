@@ -60,18 +60,24 @@ function addBook(title, author, pages, read) {
 function addNewBookCard(book) {
     const booksContainer = document.querySelector('.books-container')
     const newCard = document.createElement('div')
+
     newCard.classList.add('card')
     newCard.setAttribute('data-index', myLibrary.length - 1)
+
+    // Elements that contain book information on the card
 
     const title = document.createElement('div')
     title.classList.add('title')
     title.textContent = `Title: ${book.title}`
+
     const author = document.createElement('div')
     author.classList.add('author')
     author.textContent = `Author: ${book.author}`
+
     const pages = document.createElement('div')
     pages.classList.add('pages')
     pages.textContent = `Pages: ${book.pages}`
+
     const readText = document.createElement('div')
     readText.classList.add('readText')
     readText.textContent = `${book.getReadText()}`
@@ -86,15 +92,15 @@ function addNewBookCard(book) {
 
     newCard.appendChild(info)
 
-    const controls = document.createElement('div')
-    controls.classList.add('controls')
+    // Buttons to change book state
+
+
 
     const deleteBtn = document.createElement('button')
     deleteBtn.classList.add('delete')
     deleteBtn.textContent = 'Delete'
 
     deleteBtn.addEventListener('click', deleteCard)
-    controls.appendChild(deleteBtn)
 
     const read = document.createElement('button')
     read.classList.add('read')
@@ -105,6 +111,10 @@ function addNewBookCard(book) {
     editBtn.textContent = 'Edit'
     editBtn.addEventListener('click', editCurrentCard)
 
+    const controls = document.createElement('div')
+    controls.classList.add('controls')
+
+    controls.appendChild(deleteBtn)
     controls.appendChild(read)
     controls.appendChild(editBtn)
 
