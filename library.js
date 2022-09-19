@@ -5,12 +5,6 @@ function Book(title, author, pages, isRead) {
     this.pages = pages;
     this.isRead = isRead;
 }
-
-Book.prototype.info = function () {
-    const readStr = this.isRead === "true" ? 'already read' : 'not yet read';
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${readStr}`;
-}
-
 Book.prototype.toggleReadStatus = function () {
     this.isRead = !this.isRead
 }
@@ -32,6 +26,23 @@ const modal = document.getElementById("modal");
 const deleteAllModal = document.getElementById("delete-all-modal")
 
 document.getElementById('confirm-deletion').addEventListener('click', clearLibrary)
+document.getElementsByClassName('add')[0].addEventListener('click', showAddBookModal)
+document.getElementsByClassName('delete-all-btn')[0].addEventListener('click', showDeleteAllBooksModal)
+Array.from(document.getElementsByClassName('close')).forEach(element => {
+    element.addEventListener('click', closeModal)
+})
+Array.from(document.getElementsByClassName('cancel')).forEach(element => {
+    element.addEventListener('click', closeModal)
+})
+
+document.querySelector('button#save')
+    .addEventListener('click', function handler(e) {
+        e.preventDefault()
+        addBook(document.getElementById('bookTitle').value,
+            document.getElementById('author').value,
+            document.getElementById('pages').value,
+            document.getElementById('yes').checked)
+    })
 
 function showAddBookModal() {
     modal.style.display = "block";
@@ -66,21 +77,27 @@ function addBook(title, author, pages, read) {
 function addNewBookCard(book) {
     const booksContainer = document.querySelector('.books-container')
     const newCard = document.createElement('div')
+
     newCard.classList.add('card')
     newCard.setAttribute('data-index', myLibrary.length - 1)
 
+    // Elements that contain book information on the card
+
     const title = document.createElement('div')
     title.classList.add('title')
-    title.innerText = `Title: ${book.title}`
+    title.textContent = `Title: ${book.title}`
+
     const author = document.createElement('div')
     author.classList.add('author')
-    author.innerText = `Author: ${book.author}`
+    author.textContent = `Author: ${book.author}`
+
     const pages = document.createElement('div')
     pages.classList.add('pages')
-    pages.innerText = `Pages: ${book.pages}`
+    pages.textContent = `Pages: ${book.pages}`
+
     const readText = document.createElement('div')
     readText.classList.add('readText')
-    readText.innerText = `${book.getReadText()}`
+    readText.textContent = `${book.getReadText()}`
 
     const info = document.createElement('div')
     info.classList.add('info')
@@ -92,25 +109,29 @@ function addNewBookCard(book) {
 
     newCard.appendChild(info)
 
-    const controls = document.createElement('div')
-    controls.classList.add('controls')
+    // Buttons to change book state
+
+
 
     const deleteBtn = document.createElement('button')
     deleteBtn.classList.add('delete')
-    deleteBtn.innerText = 'Delete'
+    deleteBtn.textContent = 'Delete'
 
     deleteBtn.addEventListener('click', deleteCard)
-    controls.appendChild(deleteBtn)
 
     const read = document.createElement('button')
     read.classList.add('read')
-    read.innerText = book.getReadText()
+    read.textContent = book.getReadText()
     read.addEventListener('click', toggleReadStatus)
 
     const editBtn = document.createElement('button')
-    editBtn.innerText = 'Edit'
+    editBtn.textContent = 'Edit'
     editBtn.addEventListener('click', editCurrentCard)
 
+    const controls = document.createElement('div')
+    controls.classList.add('controls')
+
+    controls.appendChild(deleteBtn)
     controls.appendChild(read)
     controls.appendChild(editBtn)
 
@@ -132,7 +153,7 @@ function clearLibrary() {
     myLibrary = []
     removeAllBookCards()
     setNoContentVisibility()
-    document.getElementById("delete-all-modal").style.display = 'none'
+    deleteAllModal.style.display = 'none'
 }
 
 function setNoContentVisibility() {
@@ -168,7 +189,6 @@ function deleteCard(event) {
 function toggleReadStatus(event) {
     const card = event.target.parentElement.parentElement
     const bookIndex = card.getAttribute('data-index')
-    console.log(myLibrary[bookIndex])
 
     const book = myLibrary[bookIndex]
     book.toggleReadStatus()
