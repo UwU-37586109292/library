@@ -5,7 +5,7 @@ function Book(title, author, pages, isRead) {
     this.pages = pages;
     this.isRead = isRead;
 }
-Book.prototype.toggleReadStatus = function () {
+Book.prototype.changeReadStatus = function () {
     this.isRead = !this.isRead
 }
 
@@ -34,9 +34,8 @@ Array.from(document.getElementsByClassName('close')).forEach(element => {
 Array.from(document.getElementsByClassName('cancel')).forEach(element => {
     element.addEventListener('click', closeModal)
 })
-
-document.querySelector('button#save')
-    .addEventListener('click', function handler(e) {
+document.getElementById('add-book-form')
+    .addEventListener('submit', function handler(e) {
         e.preventDefault()
         addBook(document.getElementById('bookTitle').value,
             document.getElementById('author').value,
@@ -197,11 +196,11 @@ function deleteCard(event) {
 }
 
 function toggleReadStatus(event) {
-    const card = event.target.parentElement.parentElement
+    const card = event.target.parentElement.parentElement.parentElement
     const bookIndex = card.getAttribute('data-index')
 
     const book = myLibrary[bookIndex]
-    book.toggleReadStatus()
+    book.changeReadStatus()
 
     card.querySelector('.readText').textContent = myLibrary[bookIndex].getReadText()
 }
