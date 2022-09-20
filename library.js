@@ -63,7 +63,7 @@ function closeModal() {
 }
 
 function addBook(title, author, pages, read) {
-    const book = new Book(title, author, pages, read === "true")
+    const book = new Book(title, author, pages, read === true)
     const existingBook = myLibrary.find(element => element.title === book.title && element.author === book.author)
     if (existingBook) { alert('The book already exists!') }
     else {
@@ -95,24 +95,31 @@ function addNewBookCard(book) {
     pages.classList.add('pages')
     pages.textContent = `Pages: ${book.pages}`
 
-    const readText = document.createElement('div')
-    readText.classList.add('readText')
-    readText.textContent = `${book.getReadText()}`
-
     const info = document.createElement('div')
     info.classList.add('info')
+
+    // Toggle slider for read status
+    const toggleBtn = document.createElement('input')
+    toggleBtn.setAttribute('type', 'checkbox')
+    toggleBtn.setAttribute('name', 'toggle')
+    toggleBtn.setAttribute('id', 'toggle-button')
+    toggleBtn.classList.add('toggle-button')
+
+    const toggleLabel = document.createElement('label')
+    toggleLabel.setAttribute('for', 'toggle-button')
+    toggleLabel.classList.add('text')
+    toggleLabel.textContent = book.getReadText()
 
     info.appendChild(title)
     info.appendChild(author)
     info.appendChild(pages)
-    info.appendChild(readText)
+    info.appendChild(toggleBtn)
+    info.appendChild(toggleLabel)
 
     newCard.appendChild(info)
 
+
     // Buttons to change book state
-
-
-
     const deleteBtn = document.createElement('button')
     deleteBtn.classList.add('delete')
     deleteBtn.textContent = 'Delete'
