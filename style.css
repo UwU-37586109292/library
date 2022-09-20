@@ -240,6 +240,11 @@ input[type="number"] {
 
 /* Toggle button */
 
+.toggle-container {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
 
 .toggle-button {
     position: relative;
@@ -247,6 +252,7 @@ input[type="number"] {
     width: 50px;
     height: 25px;
     margin: 0;
+    margin-right: 5px;
 
     vertical-align: top;
 

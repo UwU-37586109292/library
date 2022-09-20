@@ -98,6 +98,9 @@ function addNewBookCard(book) {
     const info = document.createElement('div')
     info.classList.add('info')
 
+    const toggleContainer = document.createElement('div')
+    toggleContainer.classList.add('toggle-container')
+
     // Toggle slider for read status
     const toggleBtn = document.createElement('input')
     toggleBtn.setAttribute('type', 'checkbox')
@@ -114,11 +117,13 @@ function addNewBookCard(book) {
     toggleLabel.classList.add('readText')
     toggleLabel.textContent = book.getReadText()
 
+    toggleContainer.appendChild(toggleBtn)
+    toggleContainer.appendChild(toggleLabel)
+
     info.appendChild(title)
     info.appendChild(author)
     info.appendChild(pages)
-    info.appendChild(toggleBtn)
-    info.appendChild(toggleLabel)
+    info.appendChild(toggleContainer)
 
     newCard.appendChild(info)
 
