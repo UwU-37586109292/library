@@ -63,7 +63,7 @@ function closeModal() {
 }
 
 function addBook(title, author, pages, read) {
-    const book = new Book(title, author, pages, read === "true")
+    const book = new Book(title, author, pages, read === true)
     const existingBook = myLibrary.find(element => element.title === book.title && element.author === book.author)
     if (existingBook) { alert('The book already exists!') }
     else {
@@ -95,34 +95,45 @@ function addNewBookCard(book) {
     pages.classList.add('pages')
     pages.textContent = `Pages: ${book.pages}`
 
-    const readText = document.createElement('div')
-    readText.classList.add('readText')
-    readText.textContent = `${book.getReadText()}`
-
     const info = document.createElement('div')
     info.classList.add('info')
+
+    const toggleContainer = document.createElement('div')
+    toggleContainer.classList.add('toggle-container')
+
+    // Toggle slider for read status
+    const toggleBtn = document.createElement('input')
+    toggleBtn.setAttribute('type', 'checkbox')
+    toggleBtn.setAttribute('name', 'toggle')
+    toggleBtn.setAttribute('id', 'toggle-button')
+    toggleBtn.classList.add('toggle-button')
+
+    toggleBtn.checked = book.isRead
+
+    toggleBtn.addEventListener('change', toggleReadStatus)
+
+    const toggleLabel = document.createElement('label')
+    toggleLabel.setAttribute('for', 'toggle-button')
+    toggleLabel.classList.add('readText')
+    toggleLabel.textContent = book.getReadText()
+
+    toggleContainer.appendChild(toggleBtn)
+    toggleContainer.appendChild(toggleLabel)
 
     info.appendChild(title)
     info.appendChild(author)
     info.appendChild(pages)
-    info.appendChild(readText)
+    info.appendChild(toggleContainer)
 
     newCard.appendChild(info)
 
+
     // Buttons to change book state
-
-
-
     const deleteBtn = document.createElement('button')
     deleteBtn.classList.add('delete')
     deleteBtn.textContent = 'Delete'
 
     deleteBtn.addEventListener('click', deleteCard)
-
-    const read = document.createElement('button')
-    read.classList.add('read')
-    read.textContent = book.getReadText()
-    read.addEventListener('click', toggleReadStatus)
 
     const editBtn = document.createElement('button')
     editBtn.textContent = 'Edit'
@@ -132,7 +143,6 @@ function addNewBookCard(book) {
     controls.classList.add('controls')
 
     controls.appendChild(deleteBtn)
-    controls.appendChild(read)
     controls.appendChild(editBtn)
 
     newCard.appendChild(controls)
@@ -193,7 +203,6 @@ function toggleReadStatus(event) {
     const book = myLibrary[bookIndex]
     book.toggleReadStatus()
 
-    card.querySelector('.read').textContent = myLibrary[bookIndex].getReadText()
     card.querySelector('.readText').textContent = myLibrary[bookIndex].getReadText()
 }
 
@@ -236,7 +245,6 @@ function updateBook(bookId, book) {
         document.querySelectorAll('.card')[bookId].querySelector('.title').textContent = `Title: ${currentBook.title}`
         document.querySelectorAll('.card')[bookId].querySelector('.author').textContent = `Author: ${currentBook.author}`
         document.querySelectorAll('.card')[bookId].querySelector('.pages').textContent = `Pages: ${currentBook.pages}`
-        document.querySelectorAll('.card')[bookId].querySelector('.read').textContent = currentBook.getReadText()
         document.querySelectorAll('.card')[bookId].querySelector('.readText').textContent = currentBook.getReadText()
     }
 }
