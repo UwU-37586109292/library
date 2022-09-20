@@ -105,9 +105,13 @@ function addNewBookCard(book) {
     toggleBtn.setAttribute('id', 'toggle-button')
     toggleBtn.classList.add('toggle-button')
 
+    toggleBtn.checked = book.isRead
+
+    toggleBtn.addEventListener('change', toggleReadStatus)
+
     const toggleLabel = document.createElement('label')
     toggleLabel.setAttribute('for', 'toggle-button')
-    toggleLabel.classList.add('text')
+    toggleLabel.classList.add('readText')
     toggleLabel.textContent = book.getReadText()
 
     info.appendChild(title)
@@ -126,11 +130,6 @@ function addNewBookCard(book) {
 
     deleteBtn.addEventListener('click', deleteCard)
 
-    const read = document.createElement('button')
-    read.classList.add('read')
-    read.textContent = book.getReadText()
-    read.addEventListener('click', toggleReadStatus)
-
     const editBtn = document.createElement('button')
     editBtn.textContent = 'Edit'
     editBtn.addEventListener('click', editCurrentCard)
@@ -139,7 +138,6 @@ function addNewBookCard(book) {
     controls.classList.add('controls')
 
     controls.appendChild(deleteBtn)
-    controls.appendChild(read)
     controls.appendChild(editBtn)
 
     newCard.appendChild(controls)
@@ -200,7 +198,6 @@ function toggleReadStatus(event) {
     const book = myLibrary[bookIndex]
     book.toggleReadStatus()
 
-    card.querySelector('.read').textContent = myLibrary[bookIndex].getReadText()
     card.querySelector('.readText').textContent = myLibrary[bookIndex].getReadText()
 }
 
@@ -243,7 +240,6 @@ function updateBook(bookId, book) {
         document.querySelectorAll('.card')[bookId].querySelector('.title').textContent = `Title: ${currentBook.title}`
         document.querySelectorAll('.card')[bookId].querySelector('.author').textContent = `Author: ${currentBook.author}`
         document.querySelectorAll('.card')[bookId].querySelector('.pages').textContent = `Pages: ${currentBook.pages}`
-        document.querySelectorAll('.card')[bookId].querySelector('.read').textContent = currentBook.getReadText()
         document.querySelectorAll('.card')[bookId].querySelector('.readText').textContent = currentBook.getReadText()
     }
 }
