@@ -1,23 +1,26 @@
 
-function Book(title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-}
-Book.prototype.changeReadStatus = function () {
-    this.isRead = !this.isRead
-}
+class Book {
+    constructor(title, author, pages, isRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
 
-Book.prototype.updateBook = function (title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-}
+    changeReadStatus() {
+        this.isRead = !this.isRead
+    }
 
-Book.prototype.getReadText = function () {
-    return this.isRead ? 'Read' : 'Not read'
+    updateBook(title, author, pages, isRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
+
+    getReadText() {
+        return this.isRead ? 'Read' : 'Not read'
+    }
 }
 
 let myLibrary = [];
