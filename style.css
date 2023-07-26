@@ -186,12 +186,19 @@ input:focus {
     border: 2px solid lightblue;
 }
 
+input:valid{   
+    border: 2px solid green;
+}
+
 /* The border for required field being empty will be supported only on Chrome, not Firefox*/
-input:has(+ .error.active),
-input:invalid:not(:placeholder-shown) {
+input:has(+ .error.active){
     border: 2px solid tomato;
 }
 
+input:invalid:not(:placeholder-shown),
+input.empty:invalid{
+    border: 2px solid tomato;
+}
 
 /* The Close Button */
 .close {
