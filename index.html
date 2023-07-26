@@ -32,16 +32,17 @@
     <!-- Add book modal -->
     <div id="modal" class="modal">
         <div class="modal-content">
-            <form id="add-book-form">
-                <div class="grid-2c">
+            <form id="add-book-form" novalidate>
+                <div class="grid-3c">
                     <label for="bookTitle" aria-required="true">Title*</label>
-                    <input placeholder=" " type="text" id="bookTitle" name="bookTitle" required>
+                    <input placeholder=" " type="text" id="bookTitle" name="bookTitle" required maxlength="30">
+                    <span class="error" aria-live="polite"></span>
                     <label for="author" aria-required="true">Author*</label>
-                    <input placeholder=" " type="text" id="author" name="author" required>
+                    <input placeholder=" " type="text" id="author" name="author" required maxlength="30">
+                    <span class="error" aria-live="polite"></span>
                     <label for="pages" aria-required="true">Number of pages*</label>
                     <input placeholder=" " type="number" id="pages" name="pages" required min="1" max="10000">
-
-
+                    <span class="error" aria-live="polite"></span>
                     <fieldset>
                         <legend>Have you read it yet?</legend>
                         <label for="yes">Yes!</label>
