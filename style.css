@@ -149,9 +149,9 @@ button.reset:hover {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.grid-2c {
+.grid-3c {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 2fr 1fr;
     gap: 15px;
 }
 
@@ -186,7 +186,8 @@ input:focus {
     border: 2px solid lightblue;
 }
 
-
+/* The border for required field being empty will be supported only on Chrome, not Firefox*/
+input:has(+ .error.active),
 input:invalid:not(:placeholder-shown) {
     border: 2px solid tomato;
 }
